@@ -38,10 +38,10 @@ export class Seed {
     const normalised = raw.toUpperCase().trim();
 
     if (normalised.length !== 10) {
-      throw new Error("Seed must be 10 characters long.");
+      throw new Error("Le seed doit contenir 10 caractères.");
     }
     if (vinSuffix.length !== 6) {
-      throw new Error("VIN suffix must be 6 characters long.");
+      throw new Error("Le suffixe VIN doit contenir 6 caractères.");
     }
 
     const chars = normalised.split("");
@@ -64,12 +64,14 @@ export class Seed {
 
     if (decodedVin !== vinSuffix) {
       throw new Error(
-        `Seed does not match the provided VIN. Seed is for VIN ending in: ${decodedVin}`,
+        `Le seed ne correspond pas au VIN fourni. Le seed est destiné à un VIN se terminant par : ${decodedVin}`,
       );
     }
 
     if (!Seed.isValid24HourTime(decodedTime)) {
-      throw new Error(`Seed contains invalid time value: ${decodedTime}`);
+      throw new Error(
+        `Le seed contient une valeur de temps invalide : ${decodedTime}`,
+      );
     }
 
     return new Seed(normalised, decodedVin, decodedTime);

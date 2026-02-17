@@ -13,7 +13,7 @@ export function buildCipherMap(
 ): ReadonlyMap<string, string> {
   if (keys.length !== values.length) {
     throw new Error(
-      `Cipher key and value lengths do not match. Keys: ${keys.length}, Values: ${values.length}`,
+      `Les longueurs des clés et valeurs du chiffrement ne correspondent pas. Clés : ${keys.length}, Valeurs : ${values.length}`,
     );
   }
 
@@ -43,7 +43,9 @@ export function applyCipher(
     .map((char) => {
       const mapped = cipherMap.get(char);
       if (mapped === undefined) {
-        throw new Error(`Character "${char}" not found in cipher map.`);
+        throw new Error(
+          `Le caractère "${char}" n'a pas été trouvé dans la table de chiffrement.`,
+        );
       }
       return mapped;
     })

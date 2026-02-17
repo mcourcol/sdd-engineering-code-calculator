@@ -23,7 +23,7 @@ export class Brand {
   /** Create a Brand from a known BrandId string. Throws if invalid. */
   static fromId(id: string): Brand {
     if (!BRAND_IDS.includes(id as BrandId)) {
-      throw new Error(`Unknown brand identifier: "${id}"`);
+      throw new Error(`Identifiant de marque inconnu : "${id}"`);
     }
     return new Brand(id as BrandId);
   }

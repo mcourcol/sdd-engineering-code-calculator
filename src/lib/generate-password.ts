@@ -46,7 +46,7 @@ export function generatePassword(
 ): string {
   if (!isValidAccessOption(accessOptionCode, brand)) {
     throw new Error(
-      `Access option "${accessOptionCode}" is not valid for brand "${brand}".`,
+      `L'option d'accès "${accessOptionCode}" n'est pas valide pour la marque "${brand}".`,
     );
   }
 
@@ -54,7 +54,9 @@ export function generatePassword(
   const passwordBody = SEED_PICK_ORDER.map((idx) => {
     const mapped = passwordCipherMap.get(seed[idx]);
     if (mapped === undefined) {
-      throw new Error(`Character "${seed[idx]}" not found in cipher map.`);
+      throw new Error(
+        `Le caractère "${seed[idx]}" n'a pas été trouvé dans la table de chiffrement.`,
+      );
     }
     return mapped;
   }).join("");

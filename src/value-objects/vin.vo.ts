@@ -23,7 +23,7 @@ export class Vin {
     const normalised = raw.toUpperCase().trim();
 
     if (!normalised) {
-      throw new Error("VIN is required.");
+      throw new Error("Le VIN est requis.");
     }
     if (normalised.length !== 17 && normalised.length !== 6) {
       throw new Error(
