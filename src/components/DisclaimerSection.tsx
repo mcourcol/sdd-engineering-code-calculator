@@ -2,7 +2,7 @@ import { TriangleAlert, Info } from "lucide-react";
 
 export function DisclaimerSection() {
   return (
-    <section className="max-w-xl space-y-3 text-base">
+    <section className="max-w-2xl space-y-3 text-base">
       <div role="alert" className="alert alert-warning">
         <TriangleAlert className="h-6 w-6 shrink-0" aria-hidden="true" />
         <div className="space-y-2">

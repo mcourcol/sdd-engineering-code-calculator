@@ -40,7 +40,7 @@ export function CalculatorForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="card bg-base-200 shadow-xl p-8 w-full max-w-md space-y-6"
+      className="card bg-base-200 shadow-xl p-8 w-full max-w-2xl space-y-6"
     >
       <h2 className="text-2xl font-bold text-center">
         Générer un code d&apos;accès
