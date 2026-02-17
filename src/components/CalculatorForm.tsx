@@ -6,6 +6,7 @@ import { Brand } from "@/value-objects/brand.vo";
 import { getAccessOptionsForBrand } from "@/lib/access-options";
 import { createSddEngineerCode } from "@/lib/create-sdd-engineer-code";
 import { ResultDisplay } from "@/components/ResultDisplay";
+import { FormTextInput, FormSelect } from "@/components/form";
 
 export function CalculatorForm() {
   const brands = Brand.all();
@@ -24,6 +25,16 @@ export function CalculatorForm() {
 
   const accessOptions =
     selectedBrand !== "" ? getAccessOptionsForBrand(selectedBrand) : [];
+
+  const brandOptions = brands.map((b) => ({
+    value: b.id,
+    label: b.label,
+  }));
+
+  const accessOptionsList = accessOptions.map((opt) => ({
+    value: opt.code,
+    label: `${opt.code} — ${opt.label}`,
+  }));
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -51,100 +62,57 @@ export function CalculatorForm() {
       className="card bg-base-200 shadow-xl p-8 w-full max-w-2xl space-y-6"
     >
       <h2 className="text-2xl font-bold text-center">
-        Générer un code d&apos;accès
+        Obtenir le code ingénieur SDD
       </h2>
 
-      <fieldset className="fieldset space-y-2">
-        <label className="fieldset-label text-base font-semibold" htmlFor="vin">
-          VIN
-        </label>
-        <input
-          type="text"
-          id="vin"
-          name="vin"
-          className="input input-bordered w-full text-base h-12"
-          placeholder="17 caractères du VIN ou les 6 derniers"
-          required
-        />
-      </fieldset>
+      <FormTextInput
+        id="vin"
+        name="vin"
+        label="VIN"
+        placeholder="17 caractères du VIN ou les 6 derniers"
+        required
+      />
 
-      <fieldset className="fieldset space-y-2">
-        <label
-          className="fieldset-label text-base font-semibold"
-          htmlFor="seed"
-        >
-          Seed
-        </label>
-        <input
-          type="text"
-          id="seed"
-          name="seed"
-          className="input input-bordered w-full text-base h-12"
-          placeholder="Seed de 10 caractères"
-          maxLength={10}
-          required
-        />
-      </fieldset>
+      <FormTextInput
+        id="seed"
+        name="seed"
+        label="Seed"
+        placeholder="Seed de 10 caractères"
+        maxLength={10}
+        required
+      />
 
-      <fieldset className="fieldset space-y-2">
-        <label
-          className="fieldset-label text-base font-semibold"
-          htmlFor="marque"
-        >
-          Marque
-        </label>
-        <select
-          id="marque"
-          name="marque"
-          className="select select-bordered w-full text-base h-12"
-          required
-          value={selectedBrand}
-          onChange={(e) => setSelectedBrand(e.target.value as BrandId)}
-        >
-          <option value="" disabled>
-            Sélectionnez une marque
-          </option>
-          {brands.map((b) => (
-            <option key={b.id} value={b.id}>
-              {b.label}
-            </option>
-          ))}
-        </select>
-      </fieldset>
+      <FormSelect
+        id="marque"
+        name="marque"
+        label="Marque"
+        options={brandOptions}
+        placeholder="Sélectionnez une marque"
+        required
+        value={selectedBrand}
+        onChange={(e) => setSelectedBrand(e.target.value as BrandId)}
+      />
 
-      <fieldset className="fieldset space-y-2">
-        <label
-          className="fieldset-label text-base font-semibold"
-          htmlFor="options"
-        >
-          Option d&apos;accès
-        </label>
-        <select
-          id="options"
-          name="options"
-          className="select select-bordered w-full text-base h-12"
-          required
-          defaultValue=""
-          disabled={mounted && accessOptions.length === 0 ? true : undefined}
-        >
-          <option value="" disabled>
-            {accessOptions.length === 0
-              ? "Sélectionnez d'abord une marque"
-              : "Sélectionnez une option"}
-          </option>
-          {accessOptions.map((opt) => (
-            <option key={opt.code} value={opt.code}>
-              {opt.code} — {opt.label}
-            </option>
-          ))}
-        </select>
-      </fieldset>
+      <FormSelect
+        id="options"
+        name="options"
+        label="Option d'accès"
+        options={accessOptionsList}
+        placeholder={
+          accessOptions.length === 0
+            ? "Sélectionnez d'abord une marque"
+            : "Sélectionnez une option"
+        }
+        required
+        defaultValue=""
+        disabled={mounted && accessOptions.length === 0}
+      />
 
       <button
         type="submit"
         className="btn btn-primary w-full text-base h-12 mt-4"
       >
-        Calculer
+        Calculer le code
       </button>
 
       <ResultDisplay result={result} error={error} />
