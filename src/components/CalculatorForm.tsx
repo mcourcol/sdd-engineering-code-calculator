@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import type { AccessOptionCode, BrandId, SddEngineerCodeResult } from "@/types";
 import { Brand } from "@/value-objects/brand.vo";
 import { getAccessOptionsForBrand } from "@/constants/access-options.constants";
@@ -13,6 +13,14 @@ export function CalculatorForm() {
   const [selectedBrand, setSelectedBrand] = useState<BrandId | "">("");
   const [result, setResult] = useState<SddEngineerCodeResult | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  // This ensures the 'mounted' variable is false during SSR and true on the client after hydration.
+  // It prevents hydration mismatches for attributes like 'disabled' that depend on client-only state.
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
 
   const accessOptions =
     selectedBrand !== "" ? getAccessOptionsForBrand(selectedBrand) : [];
@@ -117,7 +125,7 @@ export function CalculatorForm() {
           className="select select-bordered w-full text-base h-12"
           required
           defaultValue=""
-          disabled={accessOptions.length === 0}
+          disabled={mounted && accessOptions.length === 0 ? true : undefined}
         >
           <option value="" disabled>
             {accessOptions.length === 0
