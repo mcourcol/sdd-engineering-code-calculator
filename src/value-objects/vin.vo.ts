@@ -27,8 +27,18 @@ export class Vin {
     }
     if (normalised.length !== 17 && normalised.length !== 6) {
       throw new Error(
-        "VIN must be 17 characters (full) or 6 characters (last 6 digits).",
+        "Le VIN doit contenir 17 caractères (complet) ou 6 caractères (6 derniers chiffres).",
       );
+    }
+
+    // For full VINs, validate the prefix
+    if (normalised.length === 17) {
+      const prefix = normalised.slice(0, 3);
+      if (prefix !== "SAL" && prefix !== "SAJ") {
+        throw new Error(
+          "Le VIN doit commencer par 'SAJ' (Jaguar) ou 'SAL' (Land Rover).",
+        );
+      }
     }
 
     return new Vin(normalised);
