@@ -1,4 +1,4 @@
-import type { AccessOption, AccessOptionCode, BrandId } from "@/types";
+import type { AccessOptionCode, BrandId } from "@/types";
 
 /** Access options available for Jaguar vehicles */
 const JAGUAR_ACCESS_OPTIONS: Record<AccessOptionCode, string> = {
@@ -25,31 +25,10 @@ const LANDROVER_ACCESS_OPTIONS: Record<AccessOptionCode, string> = {
 };
 
 /** Map of brand-specific access options */
-const ACCESS_OPTIONS_BY_BRAND: Record<
+export const ACCESS_OPTIONS_BY_BRAND: Record<
   BrandId,
   Record<AccessOptionCode, string>
 > = {
   JAG: JAGUAR_ACCESS_OPTIONS,
   LR: LANDROVER_ACCESS_OPTIONS,
 };
-
-/**
- * Returns the list of access options for a given brand.
- */
-export function getAccessOptionsForBrand(brand: BrandId): AccessOption[] {
-  const options = ACCESS_OPTIONS_BY_BRAND[brand];
-  return Object.entries(options).map(([code, label]) => ({
-    code: code as AccessOptionCode,
-    label,
-  }));
-}
-
-/**
- * Checks whether the given access option code is valid for the specified brand.
- */
-export function isValidAccessOption(
-  code: string,
-  brand: BrandId,
-): code is AccessOptionCode {
-  return code in ACCESS_OPTIONS_BY_BRAND[brand];
-}

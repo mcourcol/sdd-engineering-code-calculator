@@ -1,5 +1,5 @@
 import type { AccessOptionCode, BrandId } from "@/types";
-import { isValidAccessOption } from "@/constants/access-options.constants";
+import { isValidAccessOption } from "@/lib/access-options";
 
 /**
  * Order in which seed characters are picked to build the 10-char password body.

@@ -3,7 +3,7 @@
 import { useState, useSyncExternalStore } from "react";
 import type { AccessOptionCode, BrandId, SddEngineerCodeResult } from "@/types";
 import { Brand } from "@/value-objects/brand.vo";
-import { getAccessOptionsForBrand } from "@/constants/access-options.constants";
+import { getAccessOptionsForBrand } from "@/lib/access-options";
 import { createSddEngineerCode } from "@/lib/createSddEngineerCode";
 import { ResultDisplay } from "@/components/ResultDisplay";
 
