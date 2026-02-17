@@ -40,21 +40,21 @@ export function CalculatorForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="card bg-white dark:bg-slate-800 shadow-xl p-8 w-full max-w-md space-y-6 border border-slate-200 dark:border-slate-700"
+      className="card bg-base-200 shadow-xl p-8 w-full max-w-md space-y-6"
     >
-      <h2 className="text-2xl font-bold text-center text-[#0d5c3d] dark:text-[#14855a]">
+      <h2 className="text-2xl font-bold text-center">
         Générer un code d&apos;accès
       </h2>
 
       <fieldset className="fieldset space-y-2">
-        <label className="fieldset-label text-base font-semibold text-slate-700 dark:text-slate-300" htmlFor="vin">
+        <label className="fieldset-label text-base font-semibold" htmlFor="vin">
           VIN
         </label>
         <input
           type="text"
           id="vin"
           name="vin"
-          className="input input-bordered w-full text-base h-12 bg-slate-50 dark:bg-slate-900 border-slate-300 dark:border-slate-600 focus:border-[#0d5c3d] dark:focus:border-[#14855a] focus:ring-2 focus:ring-[#0d5c3d]/20 dark:focus:ring-[#14855a]/20"
+          className="input input-bordered w-full text-base h-12"
           placeholder="17 caractères du VIN ou les 6 derniers"
           required
         />
@@ -62,7 +62,7 @@ export function CalculatorForm() {
 
       <fieldset className="fieldset space-y-2">
         <label
-          className="fieldset-label text-base font-semibold text-slate-700 dark:text-slate-300"
+          className="fieldset-label text-base font-semibold"
           htmlFor="seed"
         >
           Seed
@@ -71,7 +71,7 @@ export function CalculatorForm() {
           type="text"
           id="seed"
           name="seed"
-          className="input input-bordered w-full text-base h-12 bg-slate-50 dark:bg-slate-900 border-slate-300 dark:border-slate-600 focus:border-[#0d5c3d] dark:focus:border-[#14855a] focus:ring-2 focus:ring-[#0d5c3d]/20 dark:focus:ring-[#14855a]/20"
+          className="input input-bordered w-full text-base h-12"
           placeholder="Seed de 10 caractères"
           maxLength={10}
           required
@@ -80,7 +80,7 @@ export function CalculatorForm() {
 
       <fieldset className="fieldset space-y-2">
         <label
-          className="fieldset-label text-base font-semibold text-slate-700 dark:text-slate-300"
+          className="fieldset-label text-base font-semibold"
           htmlFor="marque"
         >
           Marque
@@ -88,7 +88,7 @@ export function CalculatorForm() {
         <select
           id="marque"
           name="marque"
-          className="select select-bordered w-full text-base h-12 bg-slate-50 dark:bg-slate-900 border-slate-300 dark:border-slate-600 focus:border-[#0d5c3d] dark:focus:border-[#14855a] focus:ring-2 focus:ring-[#0d5c3d]/20 dark:focus:ring-[#14855a]/20"
+          className="select select-bordered w-full text-base h-12"
           required
           value={selectedBrand}
           onChange={(e) => setSelectedBrand(e.target.value as BrandId)}
@@ -106,7 +106,7 @@ export function CalculatorForm() {
 
       <fieldset className="fieldset space-y-2">
         <label
-          className="fieldset-label text-base font-semibold text-slate-700 dark:text-slate-300"
+          className="fieldset-label text-base font-semibold"
           htmlFor="options"
         >
           Option d&apos;accès
@@ -114,7 +114,7 @@ export function CalculatorForm() {
         <select
           id="options"
           name="options"
-          className="select select-bordered w-full text-base h-12 bg-slate-50 dark:bg-slate-900 border-slate-300 dark:border-slate-600 focus:border-[#0d5c3d] dark:focus:border-[#14855a] focus:ring-2 focus:ring-[#0d5c3d]/20 dark:focus:ring-[#14855a]/20"
+          className="select select-bordered w-full text-base h-12"
           required
           defaultValue=""
           disabled={accessOptions.length === 0}
@@ -134,7 +134,7 @@ export function CalculatorForm() {
 
       <button
         type="submit"
-        className="btn w-full text-base h-12 mt-4 bg-[#0d5c3d] hover:bg-[#10704a] active:bg-[#0a4a2e] dark:bg-[#10704a] dark:hover:bg-[#14855a] text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-200 border-0"
+        className="btn btn-primary w-full text-base h-12 mt-4"
       >
         Calculer
       </button>
