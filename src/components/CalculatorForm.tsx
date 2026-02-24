@@ -50,6 +50,9 @@ export function CalculatorForm() {
     }
   }
 
+  // Check if brand is auto-detected from a full VIN
+  const isBrandAutoDetected = vin.length === 17 && Brand.fromVin(vin) !== null;
+
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setResult(null);
@@ -98,16 +101,24 @@ export function CalculatorForm() {
         required
       />
 
-      <FormSelect
-        id="marque"
-        name="marque"
-        label="Marque"
-        options={brandOptions}
-        placeholder="Sélectionnez une marque"
-        required
-        value={selectedBrand}
-        onChange={(e) => setSelectedBrand(e.target.value as BrandId)}
-      />
+      <div className="space-y-1">
+        <FormSelect
+          id="marque"
+          name="marque"
+          label="Marque"
+          options={brandOptions}
+          placeholder="Sélectionnez une marque"
+          required
+          value={selectedBrand}
+          onChange={(e) => setSelectedBrand(e.target.value as BrandId)}
+          disabled={mounted && isBrandAutoDetected}
+        />
+        {isBrandAutoDetected && (
+          <p className="text-sm text-base-content/70 pl-1">
+            Marque détectée automatiquement à partir du VIN
+          </p>
+        )}
+      </div>
 
       <FormSelect
         id="options"
