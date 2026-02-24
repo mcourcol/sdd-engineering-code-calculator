@@ -1,3 +1,5 @@
+import type { ChangeEvent } from "react";
+
 interface FormTextInputProps {
   id: string;
   name: string;
@@ -5,6 +7,8 @@ interface FormTextInputProps {
   placeholder?: string;
   maxLength?: number;
   required?: boolean;
+  value?: string;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export function FormTextInput({
@@ -14,6 +18,8 @@ export function FormTextInput({
   placeholder,
   maxLength,
   required = false,
+  value,
+  onChange,
 }: FormTextInputProps) {
   return (
     <fieldset className="fieldset space-y-2">
@@ -28,6 +34,8 @@ export function FormTextInput({
         placeholder={placeholder}
         maxLength={maxLength}
         required={required}
+        value={value}
+        onChange={onChange}
       />
     </fieldset>
   );

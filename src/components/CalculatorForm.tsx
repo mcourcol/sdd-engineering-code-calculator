@@ -11,6 +11,7 @@ import { FormTextInput, FormSelect } from "@/components/form";
 export function CalculatorForm() {
   const brands = Brand.all();
 
+  const [vin, setVin] = useState("");
   const [selectedBrand, setSelectedBrand] = useState<BrandId | "">("");
   const [result, setResult] = useState<SddEngineerCodeResult | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -35,6 +36,19 @@ export function CalculatorForm() {
     value: opt.code,
     label: `${opt.code} — ${opt.label}`,
   }));
+
+  function handleVinChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const value = e.target.value.toUpperCase().trim();
+    setVin(value);
+
+    // Auto-detect brand from full VIN (17 chars)
+    if (value.length === 17) {
+      const detectedBrand = Brand.fromVin(value);
+      if (detectedBrand) {
+        setSelectedBrand(detectedBrand.value);
+      }
+    }
+  }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -71,6 +85,8 @@ export function CalculatorForm() {
         label="VIN"
         placeholder="17 caractères du VIN ou les 6 derniers"
         required
+        value={vin}
+        onChange={handleVinChange}
       />
 
       <FormTextInput
