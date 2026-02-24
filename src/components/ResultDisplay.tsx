@@ -3,7 +3,7 @@
 import type { SddEngineerCodeResult } from "@/types";
 import { Copy, Check } from "lucide-react";
 import { useState } from "react";
-import { useToast } from "@/lib/useToast";
+import { useToast } from "@/hooks/useToast";
 
 interface ResultDisplayProps {
   result: SddEngineerCodeResult | null;
